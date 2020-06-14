@@ -1,6 +1,9 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TemplateProject.Infra.Data.Context;
 using TemplateProject.Infra.IoC;
 using TemplateProject.Utilities.AutoMapper;
@@ -30,6 +33,28 @@ namespace TemplateProject.Utilities
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+        }
+
+        public static void ConfigureJWTAuthenticate(this IServiceCollection services, string clientSecret)
+        {
+            byte[] key = Encoding.ASCII.GetBytes(clientSecret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
         }
     }
 }
