@@ -6,10 +6,11 @@ using TemplateProject.Domain.Interfaces;
 using TemplateProject.Models.ViewModel.UserViewModel;
 using TemplateProject.Service.Validators.UserValidators;
 
-namespace TemplateProject.Api.Controllers
+namespace TemplateProject.Api.Controllers.v1
 {
     [ApiController]
-    [Route("api/user")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/user")]
     [Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
