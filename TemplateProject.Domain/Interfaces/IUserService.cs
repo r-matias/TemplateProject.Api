@@ -5,7 +5,7 @@ using TemplateProject.Models.ViewModel.UserViewModel;
 
 namespace TemplateProject.Domain.Interfaces
 {
-    public interface IUserService : IService<User, Guid>
+    public interface IUserService : IServiceBase<User, Guid>
     {
         Task<dynamic> Authenticate(UserAuthViewModel userAuthViewModel);
     }

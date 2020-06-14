@@ -10,13 +10,13 @@ using TemplateProject.Models.ViewModel;
 
 namespace TemplateProject.Service.Services
 {
-    public class BaseService<TEntity, TId> : IService<TEntity, TId>
+    public class ServiceBase<TEntity, TId> : IServiceBase<TEntity, TId>
         where TEntity : BaseEntity<TId>
     {
         public readonly IUnitOfWork<TEntity, TId> _unitOfWork;
         public readonly IMapper _mapper;
 
-        public BaseService(IUnitOfWork<TEntity, TId> unitOfWork,
+        public ServiceBase(IUnitOfWork<TEntity, TId> unitOfWork,
                            IMapper mapper)
         {
             _unitOfWork = unitOfWork;

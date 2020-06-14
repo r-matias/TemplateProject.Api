@@ -7,7 +7,7 @@ using TemplateProject.Models.ViewModel;
 
 namespace TemplateProject.Domain.Interfaces
 {
-    public interface IService<TEntity, TId> 
+    public interface IServiceBase<TEntity, TId> 
         where TEntity : BaseEntity<TId>
     {
         Task<ResponseValueModel<TViewModel>> Post<TValidator, TViewModel>(TViewModel obj) 

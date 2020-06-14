@@ -7,7 +7,7 @@ using TemplateProject.Models.ViewModel.UserViewModel;
 
 namespace TemplateProject.Service.Services
 {
-    public class UserService : BaseService<User, Guid>, IUserService
+    public class UserService : ServiceBase<User, Guid>, IUserService
     {
         public UserService(IUnitOfWork<User, Guid> unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {

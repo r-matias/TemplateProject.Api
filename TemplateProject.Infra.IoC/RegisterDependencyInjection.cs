@@ -1,4 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TemplateProject.Domain.Interfaces;
 using TemplateProject.Infra.Data.Repository;
 using TemplateProject.Service.Services;
@@ -16,14 +19,31 @@ namespace TemplateProject.Infra.IoC
 
         private void RegisterRepository(IServiceCollection services)
         {
-            services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
+            var typesRepositoriesInterface = typeof(IBaseRepository<,>).Assembly.GetTypes().ToList();
+            var typesRepositoriesClass = typeof(BaseRepository<,>).Assembly.GetTypes().ToList();
+
+            RegisterDynamic(services, typesRepositoriesInterface, typesRepositoriesClass);
         }
 
         private void RegisterService(IServiceCollection services)
         {
-            services.AddScoped(typeof(IService<,>), typeof(BaseService<,>));
+            var typesServicesInterface = typeof(IServiceBase<,>).Assembly.GetTypes().ToList();
+            var typesServicesClass = typeof(ServiceBase<,>).Assembly.GetTypes().ToList();
 
-            services.AddScoped<IUserService, UserService>();
+            RegisterDynamic(services, typesServicesInterface, typesServicesClass);
+        }
+
+        private void RegisterDynamic(IServiceCollection services, List<Type> interfacesTypes, List<Type> classesTypes)
+        {
+            foreach (Type typeClass in classesTypes)
+            {
+                Type typeInterface = interfacesTypes.FirstOrDefault(x => x.Name.Contains(typeClass.Name));
+
+                if (typeInterface != null)
+                {
+                    services.AddScoped(typeInterface, typeClass);
+                }
+            }
         }
     }
 }
