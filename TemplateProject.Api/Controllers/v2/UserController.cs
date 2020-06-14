@@ -11,7 +11,7 @@ namespace TemplateProject.Api.Controllers.v2
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok("");
+            return Ok("versao 2");
         }
     }
 }
