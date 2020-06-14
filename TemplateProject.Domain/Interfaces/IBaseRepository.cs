@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model.Base;
 
 namespace TemplateProject.Domain.Interfaces
 {

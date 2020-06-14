@@ -1,7 +1,7 @@
 using System;
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model.Base;
 
-namespace TemplateProject.Entities.Model
+namespace TemplateProject.Domain.Entities.Model
 {
     public abstract class BaseMessageEntity : CreatedEntity<Guid>
     {

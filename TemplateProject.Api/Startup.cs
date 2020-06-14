@@ -6,6 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using TemplateProject.Service.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace TemplateProject.Api
 {
@@ -27,21 +31,41 @@ namespace TemplateProject.Api
             services.RegisterIoC();
             services.ConfigureDbContext(Configuration.GetValue<string>("TemplateProjectConnectionString"));
 
-            services.AddSwaggerGen(c => {
+            byte[] key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("CustomLogin:ClientSecret"));
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
+            services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "Indicadores Econ�micos",
+                        Title = "TemplateProject.Api",
                         Version = "v1",
-                        Description = "Exemplo de API REST criada com o ASP.NET Core 3.0 para consulta a indicadores econ�micos",
+                        Description = "TemplateProject.Api [incluir descrição]",
                         Contact = new OpenApiContact
                         {
-                            Name = "Renato Groffe",
-                            Url = new Uri("https://github.com/renatogroffe")
+                            Name = "Rafael Soarde Matias",
+                            Url = new Uri("https://github.com/r-matias")
                         }
                     });
             });
+
+            TokenService.SetSecretToken(Configuration.GetValue<string>("CustomLogin:ClientSecret"));
 
             //services.AddAuthentication()
             //        .AddGoogle(options =>
@@ -58,10 +82,10 @@ namespace TemplateProject.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseSwagger();
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Indicadores Econ�micos V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TemplateProject.Api V1");
                 c.RoutePrefix = string.Empty;
             });
 
@@ -69,6 +93,12 @@ namespace TemplateProject.Api
 
             app.UseRouting();
 
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

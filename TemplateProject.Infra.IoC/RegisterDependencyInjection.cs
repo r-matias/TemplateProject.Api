@@ -22,6 +22,8 @@ namespace TemplateProject.Infra.IoC
         private void RegisterService(IServiceCollection services)
         {
             services.AddScoped(typeof(IService<,>), typeof(BaseService<,>));
+
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

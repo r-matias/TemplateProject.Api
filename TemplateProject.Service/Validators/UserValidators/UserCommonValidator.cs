@@ -14,6 +14,10 @@ namespace TemplateProject.Service.Validators.UserValidators
             RuleFor(c => c.Password)
                 .NotEmpty().WithMessage("É necessário informar a Senha.")
                 .NotNull().WithMessage("É necessário informar a Senha.");
+
+            RuleFor(c => c.Role)
+                .NotEmpty().WithMessage("É necessário informar uma Role.")
+                .NotNull().WithMessage("É necessário informar uma Role.");
         }
     }
 }

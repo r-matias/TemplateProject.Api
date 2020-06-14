@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TemplateProject.Domain.Interfaces;
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model.Base;
 using TemplateProject.Infra.Data.Context;
 
 namespace TemplateProject.Infra.Data.Repository

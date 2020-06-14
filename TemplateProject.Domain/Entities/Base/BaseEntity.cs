@@ -1,4 +1,4 @@
-namespace TemplateProject.Entities.Model.Base
+namespace TemplateProject.Domain.Entities.Model.Base
 {
     public abstract class BaseEntity<TId>
     {

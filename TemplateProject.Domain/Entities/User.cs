@@ -1,7 +1,7 @@
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model.Base;
 using System;
 
-namespace TemplateProject.Entities.Model
+namespace TemplateProject.Domain.Entities.Model
 {
     public class User : BaseEntity<Guid>
     {
@@ -13,5 +13,6 @@ namespace TemplateProject.Entities.Model
 
         public string Email { get; private set; }
         public string Password { get; private set; }
+        public string Role { get; set; }
     }
 }

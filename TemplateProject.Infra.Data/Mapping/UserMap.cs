@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TemplateProject.Entities.Model;
+using TemplateProject.Domain.Entities.Model;
 
 namespace TemplateProject.Infra.Data.Mapping
 {

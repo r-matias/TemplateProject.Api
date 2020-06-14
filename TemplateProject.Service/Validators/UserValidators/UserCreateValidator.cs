@@ -1,10 +1,9 @@
 using FluentValidation;
-using TemplateProject.Domain.Interfaces;
-using TemplateProject.Entities.Model;
-using TemplateProject.Service.Validators.UserValidators;
 using System;
+using TemplateProject.Domain.Entities.Model;
+using TemplateProject.Domain.Interfaces;
 
-namespace TemplateProject.Service.Validators.WorldValidators
+namespace TemplateProject.Service.Validators.UserValidators
 {
     public class UserCreateValidator : UserCommonValidator
     {
@@ -14,9 +13,9 @@ namespace TemplateProject.Service.Validators.WorldValidators
 
             RuleFor(c => c.Email).Custom((email, context) =>
             {
-                bool hasWorldName = unitOfWork.User.AnyEntityOnCondition(x => x.Email == email).Result;
+                bool hasEmailInDatabase = unitOfWork.User.AnyEntityOnCondition(x => x.Email == email).Result;
 
-                if (hasWorldName)
+                if (hasEmailInDatabase)
                     context.AddFailure($"Já existe um usuário com esse e-mail {email}.");
             });
         }

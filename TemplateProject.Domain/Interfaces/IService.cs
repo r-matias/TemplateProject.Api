@@ -1,7 +1,7 @@
 using FluentValidation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model.Base;
 using TemplateProject.Models;
 using TemplateProject.Models.ViewModel;
 

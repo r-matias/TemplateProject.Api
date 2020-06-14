@@ -1,5 +1,5 @@
-using TemplateProject.Entities.Model;
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model;
+using TemplateProject.Domain.Entities.Model.Base;
 using System;
 
 namespace TemplateProject.Domain.Interfaces

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TemplateProject.Domain.Interfaces;
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model.Base;
 using TemplateProject.Models;
 using TemplateProject.Models.ViewModel;
 
@@ -13,8 +13,8 @@ namespace TemplateProject.Service.Services
     public class BaseService<TEntity, TId> : IService<TEntity, TId>
         where TEntity : BaseEntity<TId>
     {
-        private readonly IUnitOfWork<TEntity, TId> _unitOfWork;
-        private readonly IMapper _mapper;
+        public readonly IUnitOfWork<TEntity, TId> _unitOfWork;
+        public readonly IMapper _mapper;
 
         public BaseService(IUnitOfWork<TEntity, TId> unitOfWork,
                            IMapper mapper)

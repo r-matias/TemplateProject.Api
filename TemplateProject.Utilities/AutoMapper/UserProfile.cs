@@ -1,5 +1,5 @@
 using AutoMapper;
-using TemplateProject.Entities.Model;
+using TemplateProject.Domain.Entities.Model;
 using TemplateProject.Models.ViewModel.UserViewModel;
 
 namespace TemplateProject.Utilities.AutoMapper
@@ -12,6 +12,7 @@ namespace TemplateProject.Utilities.AutoMapper
             CreateMap<User, UserCreateViewModel>().ReverseMap();
             CreateMap<User, UserGetIdViewModel>();
             CreateMap<User, UserGetListViewModel>();
+            CreateMap<User, UserAuthenticatedViewModel>();
                 //.ForMember(c => c.Location, opt => opt.MapFrom(y => y.Location.GetEnumDisplayName()))
                 //.ForMember(c => c.PvpType, opt => opt.MapFrom(y => y.PvpType.GetEnumDisplayName()));
         }

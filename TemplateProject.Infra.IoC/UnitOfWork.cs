@@ -1,6 +1,6 @@
 using TemplateProject.Domain.Interfaces;
-using TemplateProject.Entities.Model;
-using TemplateProject.Entities.Model.Base;
+using TemplateProject.Domain.Entities.Model;
+using TemplateProject.Domain.Entities.Model.Base;
 using TemplateProject.Infra.Data.Context;
 using TemplateProject.Infra.Data.Repository;
 using System;

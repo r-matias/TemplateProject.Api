@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TemplateProject.Entities.Model;
+using TemplateProject.Domain.Entities.Model;
 using TemplateProject.Infra.Data.Mapping;
 
 namespace TemplateProject.Infra.Data.Context
